@@ -1,0 +1,572 @@
+/* ==========================================================================
+   dr.da labs — Dr. Darpan Vijaykumar Bhuse
+   "The Soul of Scent, the Mind of Molecules"
+
+   Palette derives from his own subject matter, not from perfume-brand stock:
+   - ground   : oud resin, a warm brown-black rather than neutral near-black
+   - brand    : porphyrin wine — porphyrins are the wine-red macrocycles he
+                actually synthesises for dye-sensitized solar cells
+   - accent   : attar ochre, the colour of aged oil in the bottle
+   Type carries the tagline's two halves: Fraunces italic = scent,
+   IBM Plex Mono uppercase = molecules.
+   ========================================================================== */
+
+:root {
+  --bg:         #17100C;
+  --surface:    #211711;
+  --surface-2:  #2A1E17;
+  --line:       #33251C;
+  --fg:         #EDE4D6;
+  --fg-dim:     #A2907E;
+  --brand:      #8E1F3C;
+  --brand-soft: #C04462;
+  --accent:     #D89A3A;
+
+  --serif: "Fraunces", Georgia, serif;
+  --sans:  "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono:  "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Type scale, 1.25 ratio off a 17px body */
+  --t-xs:   0.75rem;
+  --t-sm:   0.875rem;
+  --t-base: 1.0625rem;
+  --t-md:   1.3rem;
+  --t-lg:   1.75rem;
+  --t-xl:   2.4rem;
+  --t-2xl:  3.4rem;
+  --t-3xl:  clamp(2.6rem, 8vw, 5.75rem);
+
+  --gap:  1.5rem;
+  --pad:  clamp(1.25rem, 5vw, 2.5rem);
+  --band: clamp(3.5rem, 9vw, 7rem);
+  --max:  74rem;
+  --read: 40rem;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:         #F5EFE4;
+    --surface:    #FBF7EF;
+    --surface-2:  #F0E7D8;
+    --line:       #DED2BE;
+    --fg:         #241A13;
+    --fg-dim:     #6B5A4A;
+    --brand:      #8E1F3C;
+    --brand-soft: #6E1230;
+    --accent:     #8A5A10;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: var(--t-base)/1.65 var(--sans);
+  font-synthesis-weight: none;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--fg); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Shared primitives ---------------------------------------- */
+
+.wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+/* Eyebrow: the "molecules" register. Every label on the site is mono. */
+.eyebrow {
+  margin: 0 0 1.25rem;
+  font: 500 var(--t-xs)/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Section headings: the "scent" register. Every heading is Fraunces. */
+.h2 {
+  margin: 0 0 1rem;
+  font: 400 var(--t-xl)/1.1 var(--serif);
+  font-variation-settings: "SOFT" 30, "opsz" 60;
+  letter-spacing: -0.015em;
+}
+
+.h3 {
+  margin: 0 0 0.5rem;
+  font: 500 var(--t-md)/1.25 var(--serif);
+  font-variation-settings: "SOFT" 20, "opsz" 24;
+}
+
+.lede {
+  max-width: var(--read);
+  margin: 0 0 2rem;
+  font-size: var(--t-md);
+  line-height: 1.55;
+  color: var(--fg-dim);
+}
+
+.band { padding-block: var(--band); border-top: 1px solid var(--line); }
+/* For bands inside a section that already draws its own top border. */
+.band--flush { border-top: 0; }
+
+.after-rows { margin-top: 2rem; }
+
+/* ---------- Skip link ------------------------------------------------ */
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+.skip:focus {
+  left: 1rem; top: 1rem;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  font: 500 var(--t-sm) var(--mono);
+}
+
+/* ---------- Masthead ------------------------------------------------- */
+
+.masthead {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.masthead__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem var(--gap);
+  padding-block: 1.1rem;
+}
+
+.wordmark {
+  margin-right: auto;
+  font: 600 1.05rem/1 var(--mono);
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  text-decoration: none;
+}
+.wordmark b { color: var(--brand-soft); font-weight: 600; }
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.4rem;
+}
+
+.nav a {
+  font: 500 var(--t-sm)/1 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  text-decoration: none;
+  padding-block: 0.35rem;
+  border-bottom: 1px solid transparent;
+}
+.nav a:hover { color: var(--fg); border-bottom-color: var(--line); }
+.nav a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--brand-soft); }
+
+/* ---------- Hero: the signature ------------------------------------- */
+/* Aromatic-ring lattice behind the tagline. Porphyrins and phthalocyanines
+   — his research subjects — are fused aromatic rings, so the motif is
+   literal rather than decorative. Inline SVG: no image request, no library. */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 11vw, 8rem) var(--band);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -10% -10% auto auto;
+  width: min(46rem, 90%);
+  aspect-ratio: 1;
+  opacity: 0.12;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='69.28' height='120' viewBox='0 0 69.28 120'%3E%3Cg fill='none' stroke='%238E1F3C' stroke-width='1'%3E%3Cpolygon points='34.64,-10 69.28,10 69.28,50 34.64,70 0,50 0,10'/%3E%3Cpolygon points='0,50 34.64,70 34.64,110 0,130 -34.64,110 -34.64,70'/%3E%3Cpolygon points='69.28,50 103.92,70 103.92,110 69.28,130 34.64,110 34.64,70'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask-image: radial-gradient(closest-side, #000 30%, transparent 100%);
+          mask-image: radial-gradient(closest-side, #000 30%, transparent 100%);
+}
+
+.hero__inner { position: relative; }
+
+/* The tagline, split across two type registers. */
+.tagline { margin: 0 0 1.75rem; }
+
+.tagline__scent {
+  display: block;
+  font: 300 var(--t-3xl)/0.98 var(--serif);
+  font-style: italic;
+  font-variation-settings: "SOFT" 60, "WONK" 1, "opsz" 144;
+  letter-spacing: -0.03em;
+}
+
+.tagline__rule {
+  display: block;
+  width: min(18rem, 60%);
+  height: 1px;
+  margin: clamp(1rem, 2.5vw, 1.75rem) 0;
+  background: linear-gradient(90deg, var(--brand-soft), transparent);
+}
+
+.tagline__molecules {
+  display: block;
+  font: 500 clamp(0.95rem, 2.6vw, 1.6rem)/1.3 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.hero__bio {
+  max-width: 34rem;
+  margin: 0 0 2.25rem;
+  font-size: var(--t-md);
+  line-height: 1.6;
+}
+.hero__bio strong { color: var(--fg); font-weight: 600; }
+
+/* Staggered reveal on load. One orchestrated moment, nothing else moves. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__inner > * {
+    animation: rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+  .hero__inner > :nth-child(1) { animation-delay: 0.05s; }
+  .hero__inner > :nth-child(2) { animation-delay: 0.15s; }
+  .hero__inner > :nth-child(3) { animation-delay: 0.3s; }
+  .hero__inner > :nth-child(4) { animation-delay: 0.42s; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(0.9rem); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Buttons -------------------------------------------------- */
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  font: 500 var(--t-sm)/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--brand);
+  transition: background-color 0.18s, color 0.18s, border-color 0.18s;
+}
+
+.btn--fill { background: var(--brand); color: #FBF3EE; }
+.btn--fill:hover { background: var(--brand-soft); border-color: var(--brand-soft); color: #FBF3EE; }
+
+.btn--line { background: none; color: var(--fg); border-color: var(--line); }
+.btn--line:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- Credential strip ---------------------------------------- */
+
+.creds {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.creds__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.5rem;
+  margin: 0;
+  padding-block: 1.5rem;
+  list-style: none;
+  font: var(--t-sm)/1.5 var(--mono);
+  color: var(--fg-dim);
+}
+.creds__list b { color: var(--fg); font-weight: 500; }
+
+/* ---------- Card grids ---------------------------------------------- */
+
+.grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+}
+
+.card {
+  padding: 1.6rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--brand);
+}
+
+.card p { margin: 0; color: var(--fg-dim); font-size: var(--t-sm); }
+
+/* Mono index marker. These are a taxonomy of subjects, not a sequence,
+   so they are labelled by field abbreviation rather than numbered 01/02/03. */
+.card__tag {
+  display: block;
+  margin-bottom: 0.9rem;
+  font: 500 var(--t-xs)/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-soft);
+}
+
+/* ---------- Video cards --------------------------------------------- */
+
+.video {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: border-color 0.18s;
+}
+.video:hover { border-color: var(--accent); color: inherit; }
+
+.video img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+
+/* Cap the track width so a section holding one video does not stretch that
+   card across the whole measure. auto-fill + a max track size, not auto-fit. */
+.grid--videos {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 22rem));
+  justify-content: start;
+}
+.grid--shorts {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 15rem));
+  justify-content: start;
+}
+
+/* Shorts are shot 9:16. YouTube pillarboxes them inside a 480x360 hqdefault,
+   so a 9:16 crop lands exactly on the video and the black bars fall away. */
+.video--short img { aspect-ratio: 9 / 16; }
+
+.video__body { padding: 1.1rem 1.25rem 1.35rem; }
+
+.video__meta {
+  display: block;
+  margin-bottom: 0.5rem;
+  font: 500 var(--t-xs)/1 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.video__title {
+  margin: 0;
+  font: 500 1.05rem/1.35 var(--sans);
+}
+
+.video:hover .video__title { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Featured video runs wider, with the description alongside. */
+.featured { display: grid; gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
+@media (min-width: 52rem) {
+  .featured { grid-template-columns: 1.15fr 1fr; }
+}
+.featured .video img { aspect-ratio: 16 / 9; }
+
+/* ---------- Prose --------------------------------------------------- */
+
+.prose { max-width: var(--read); }
+.prose p { margin: 0 0 1.15rem; }
+.prose p:last-child { margin-bottom: 0; }
+.prose h3 {
+  margin: 2.5rem 0 0.75rem;
+  font: 500 var(--t-md)/1.25 var(--serif);
+  font-variation-settings: "SOFT" 20, "opsz" 24;
+}
+
+.pull {
+  margin: 2.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--brand);
+  font: 400 var(--t-lg)/1.35 var(--serif);
+  font-style: italic;
+  font-variation-settings: "SOFT" 60, "WONK" 1, "opsz" 72;
+  color: var(--fg);
+}
+
+/* ---------- Data rows: qualifications, awards, publications --------- */
+
+.rows { border-top: 1px solid var(--line); }
+
+.row {
+  display: grid;
+  gap: 0.25rem 2rem;
+  padding-block: 1.35rem;
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 44rem) {
+  .row { grid-template-columns: 11rem 1fr; }
+}
+
+.row__key {
+  font: 500 var(--t-xs)/1.6 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.row__val { margin: 0; }
+.row__val small {
+  display: block;
+  margin-top: 0.3rem;
+  font: var(--t-sm)/1.5 var(--mono);
+  color: var(--fg-dim);
+}
+
+/* ---------- Journals ------------------------------------------------ */
+
+.journals { display: grid; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+
+.journal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.journal__name { font: 500 var(--t-base) var(--sans); }
+
+.journal__if {
+  font: 500 var(--t-xs)/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* ---------- Notice: honest gap in the data -------------------------- */
+
+.notice {
+  margin-top: var(--gap);
+  padding: 1.25rem 1.4rem;
+  background: var(--surface-2);
+  border: 1px dashed var(--line);
+  font-size: var(--t-sm);
+  color: var(--fg-dim);
+}
+.notice b { color: var(--fg); font-weight: 600; }
+
+/* ---------- Atelier ------------------------------------------------- */
+
+.atelier { background: var(--surface); border-block: 1px solid var(--line); }
+
+.atelier__grid { display: grid; gap: var(--gap); align-items: start; }
+@media (min-width: 52rem) {
+  .atelier__grid { grid-template-columns: 1fr 1fr; }
+}
+
+.atelier__item { padding-top: 1.25rem; border-top: 2px solid var(--brand); }
+.atelier__item p { margin: 0 0 1rem; color: var(--fg-dim); }
+
+.status {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.3rem 0.6rem;
+  font: 500 var(--t-xs)/1 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+}
+
+/* ---------- Follow -------------------------------------------------- */
+
+.follow { display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); }
+
+.follow__card {
+  padding: 1.4rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.18s, background-color 0.18s;
+}
+.follow__card:hover { border-color: var(--accent); background: var(--surface-2); color: inherit; }
+
+.follow__handle {
+  display: block;
+  font: 500 var(--t-md)/1.2 var(--mono);
+  color: var(--fg);
+  margin-bottom: 0.35rem;
+}
+.follow__where {
+  display: block;
+  font: var(--t-xs)/1 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.follow__what { font-size: var(--t-sm); color: var(--fg-dim); }
+
+/* ---------- Footer -------------------------------------------------- */
+
+.footer {
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  padding-block: var(--band) 2.5rem;
+}
+
+.footer__grid {
+  display: grid;
+  gap: 2.5rem var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+}
+
+.footer h2 {
+  margin: 0 0 1rem;
+  font: 500 var(--t-xs)/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.footer ul { margin: 0; padding: 0; list-style: none; }
+.footer li { margin-bottom: 0.5rem; font-size: var(--t-sm); }
+.footer p { margin: 0 0 0.5rem; font-size: var(--t-sm); color: var(--fg-dim); }
+
+.footer__mail {
+  font: 500 var(--t-md) var(--mono);
+  overflow-wrap: anywhere;
+}
+
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: var(--band);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font: var(--t-xs)/1.6 var(--mono);
+  color: var(--fg-dim);
+}

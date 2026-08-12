@@ -1,0 +1,8 @@
+{
+  "name": "drda-labs",
+  "private": true,
+  "description": "dr.da labs — static site for Dr. Darpan Vijaykumar Bhuse",
+  "scripts": {
+    "dev": "node dev.js"
+  }
+}
